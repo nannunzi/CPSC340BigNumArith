@@ -37,4 +37,47 @@ public class BigNumArithmetic {
             }
         }
     }
+    public String addition(String firstVar, String secondVar){
+        LStack one= new LStack();
+        LStack two= new LStack();
+        LStack solved=new LStack();
+        String endString="";
+        boolean carry=false;
+        int topLength=0;
+        if(firstVar.length()>=secondVar.length()){
+            topLength=firstVar.length();
+        }else{
+            topLength=secondVar.length();
+        }
+        String formattedFirst= String.format("%0"+topLength+"d", firstVar);
+        String formattedSecond= String.format("%0"+topLength+"d", secondVar);
+        for (int i=0; i<firstVar.length(); i++){
+            one.push(firstVar.charAt(i));
+        }
+        for (int i=0; i<secondVar.length(); i++){
+            two.push(secondVar.charAt(i));
+        }
+        for(int i=0; i<topLength; i++){
+            int total=0;
+            int topOne= (int) one.pop();
+            int topTwo= (int) two.pop();
+            if(carry) {
+                total = +1 + topOne + topTwo;
+            }else{
+                total=topOne+topTwo;
+            }
+            if(total>10){
+            carry=true;
+            total=total-10;
+        }else{
+                carry=false;
+            } solved.push(total);
+    }
+
+        while (!solved.isEmpty()){
+            char newChar= (char) solved.pop();
+            endString=endString+newChar;
+        }
+        return endString;
+        }
 }
