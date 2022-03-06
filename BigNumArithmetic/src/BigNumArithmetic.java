@@ -130,10 +130,10 @@ public class BigNumArithmetic {
             int total=0;
             int topOne= (int) one.pop();
             int topTwo= (int) two.pop();
-		if(total>10){
+		 if(total>10){
                 //sets carry value to true and subtracts 10 from the total value
             carry=true;
-            total=total-10;
+            
         	}else{
                 //sets carry to false
                 carry=false;
