@@ -99,12 +99,13 @@ public class BigNumArithmetic {
         return endString;
         }
 
- public String subtract(String firstVar, String secondVar){ //IN PROGRESS, HAVE TO GO TO WORK
+ public String subtract(String firstVar, String secondVar){ //should be finished
         //three stacks, two for containing the character of each source numeric string, one for the solution
         LStack one= new LStack();
         LStack two= new LStack();
         LStack solved=new LStack();
         String endString="";
+        boolean prevCarry=false;
         boolean carry=false;
         int topLength=0;
         
@@ -130,33 +131,33 @@ public class BigNumArithmetic {
             int total=0;
             int topOne= (int) one.pop();
             int topTwo= (int) two.pop();
-		 if(total>10){
-                //sets carry value to true and subtracts 10 from the total value
-            carry=true;
-            
-        	}else{
-                //sets carry to false
-                carry=false;
-                
-            //checks if the previous calculation had a carried one.
+            if (prevCarry){
+                 carry=true;
+                 prevCarry=false;
+            }
+            if(carry&& topOne-1<topTwo){
+                  prevCarry=true;
+            }
+            else if (topOne<topTwo){
+                  prevCarry=true;
+            }
+            if(prevCarry){
+                topOne+=10;
+            }
             if(carry) {
                 //adds the carry value and the two popped values.
-                total = +1 + topOne + topTwo;
+                total = (topOne-1) - topTwo;
+                carry=false;
             }else{
                 //no carry value just adds two values.
-                total=topOne+topTwo;
+                total=topOne-topTwo;
             }
-            //checks if the total is greater than 10
-            if(total>10){
-                //sets carry value to true and subtracts 10 from the total value
-            carry=true;
-            total=total-10;
-        }else{
-                //sets carry to false
-                carry=false;
-                //adds the values to a "Solved" stack in reverse order.
+
+
+
+
             } solved.push(total);
-    }
+    
         //while solved is not empty it goes through popping each numeric char and then adds them to end string.
         while (!solved.isEmpty()){
             char newChar= (char) solved.pop();
