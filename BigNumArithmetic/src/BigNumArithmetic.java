@@ -166,4 +166,67 @@ public class BigNumArithmetic {
         //returns endstring.
         return endString;
         }
+    public String multiply(String firstVar, String secondVar){
+        //three stacks, two for containing the character of each source numeric string, one for the solution
+        String total="000000000000000000";
+
+        LStack one= new LStack();
+        LStack two= new LStack();
+        LStack temp=new LStack();
+        LStack solved=new LStack();
+        //Placeholder declaration for the returned numerical string
+        String endString="";
+        //boolean for carrying a 1
+        boolean carry=false;
+        //top length integer for sizing purposes
+        int topLength=0;
+        //check if firstVar or secondVar are longer, then set the longest length to top leength
+        if(firstVar.length()>=secondVar.length()){
+            topLength=firstVar.length();
+        }else{
+            topLength=secondVar.length();
+        }
+        //formats two new strings to the top length, formatting the smaller one with leading 0s (technically reformats both but the larger doesn't undergo any changes)
+        String formattedFirst= String.format("%0"+topLength+"d", firstVar);
+        String formattedSecond= String.format("%0"+topLength+"d", secondVar);
+
+        //Goes through the formatted string pushing each character individually to the first stack.
+        for (int i=0; i<formattedFirst.length(); i++){
+            one.push(formattedFirst.charAt(i));
+        }
+        //Does the above to a second stack
+        for (int i=0; i<formattedSecond.length(); i++){
+            two.push(formattedSecond.charAt(i));
+        }
+        //for the total length (how many digits) it goes through, pops the top off of each stack (which would be the ones place)
+        for(int i=0; i<topLength; i++){
+            int topOne= (int) one.pop();
+
+            if(two.isEmpty) {
+                for (int c = 0; c < topLength; c++) {
+
+                    int value = (int) temp.pop();
+                    int tempTotalInt = value * topOne;
+                    String tempTotal = (String) tempTotalInt;
+
+                    total = addition(total, tempTotal)
+                    two.push(value);
+                }
+            }else{
+                for(int c=0; c<topLength; c++) {
+
+                    int value = (int) two.pop();
+                    int tempTotalInt = value * topOne;
+                    String tempTotal = (String) tempTotalInt;
+                    total = addition(total, tempTotal);
+                    temp.push(value);
+                }
+            }
+        }
+
+
+        //returns endstring.
+            return total;
+    }
 }
+
