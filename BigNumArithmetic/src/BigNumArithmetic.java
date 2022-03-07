@@ -154,9 +154,9 @@ public class BigNumArithmetic {
             }
 
 
+            solved.push(total);
 
-
-            } solved.push(total);
+            }
     
         //while solved is not empty it goes through popping each numeric char and then adds them to end string.
         while (!solved.isEmpty()){
@@ -202,14 +202,14 @@ public class BigNumArithmetic {
         for(int i=0; i<topLength; i++){
             int topOne= (int) one.pop();
 
-            if(two.isEmpty) {
+            if(two.isEmpty()) {
                 for (int c = 0; c < topLength; c++) {
 
                     int value = (int) temp.pop();
                     int tempTotalInt = value * topOne;
-                    String tempTotal = (String) tempTotalInt;
+                    String tempTotal = Integer.toString(tempTotalInt);
 
-                    total = addition(total, tempTotal)
+                    total = addition(total, tempTotal);
                     two.push(value);
                 }
             }else{
@@ -217,7 +217,7 @@ public class BigNumArithmetic {
 
                     int value = (int) two.pop();
                     int tempTotalInt = value * topOne;
-                    String tempTotal = (String) tempTotalInt;
+                    String tempTotal = Integer.toString(tempTotalInt);
                     total = addition(total, tempTotal);
                     temp.push(value);
                 }
