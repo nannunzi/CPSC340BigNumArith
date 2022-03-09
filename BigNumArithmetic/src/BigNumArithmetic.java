@@ -17,6 +17,8 @@ public class BigNumArithmetic {
 	    String retval = raw;
 	    String[] arrayRaw=raw.split(" ");
 	    int count = 0;
+	    FileOutputStream fileOut = new FileOutputStream("BignumOutput.txt");
+	    PrintWriter out = new PrintWriter(fileOut);
 	    ArrayList<String> inputs = new ArrayList<String>;
 	    ArrayList<String> operators;= new ArrayList<String>;
 	    for(String i :arrayRaw){
@@ -51,8 +53,10 @@ public class BigNumArithmetic {
             string1.push(i);
 			count++;
 			}
-		    System.out.println(retval);
+		   out.println(retval);
 		}
+out.flush();
+fileOut.close();
 	}	    /*if It exists, opens up a file reader
             FileReader reader = new FileReader(source);
             StringBuilder sb = new StringBuilder();
