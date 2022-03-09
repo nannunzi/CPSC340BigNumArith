@@ -229,4 +229,77 @@ public class BigNumArithmetic {
             return total;
     }
 }
+/**
+ * public static String addition(String firstVar, String secondVar){
+ *         //three stacks, two for containing the character of each source numeric string, one for the solution
+ *         LStack one= new LStack();
+ *         LStack two= new LStack();
+ *         LStack solved=new LStack();
+ *         //Placeholder declaration for the returned numerical string
+ *         String endString="";
+ *         //boolean for carrying a 1
+ *         boolean carry=false;
+ *         //top length integer for sizing purposes
+ *         int lengthDif=0;
+ *         int topLength=0;
+ *         //check if firstVar or secondVar are longer, then set the longest length to top leength
+ *         if(firstVar.length()>=secondVar.length()){
+ *                 topLength=firstVar.length();
+ *         lengthDif=firstVar.length()-secondVar.length();
+ *                 for (int i=0; i<firstVar.length(); i++) {
+ *                         one.push(firstVar.charAt(i));
+ *                 }
+ *                 for (int i=0; i<lengthDif; i++) {
+ *                         two.push(0);
+ *                 }for (int i=0; i<secondVar.length(); i++) {
+ *                         two.push(secondVar.charAt(i));}
+ *                 }else{
+ *                 topLength=secondVar.length();
+ *                 lengthDif=secondVar.length()-firstVar.length();
+ *                 for (int i=0; i<secondVar.length(); i++) {
+ *                         one.push(secondVar.charAt(i));
+ *                 }
+ *                 for (int i=0; i<lengthDif; i++) {
+ *                         two.push(0);
+ *                 }
+ *                 for (int i=0; i<firstVar.length(); i++){
+ *                         two.push(secondVar.charAt(i));
+ *                 }
+ *         }
+ *         //formats two new strings to the top length, formatting the smaller one with leading 0s (technically reformats both but the larger doesn't undergo any changes)
+ *
+ *         //Goes through the formatted string pushing each character individually to the first stack.
+ *         //for the total length (how many digits) it goes through, pops the top off of each stack (which would be the ones place)
+ *         for(int i=0; i<topLength; i++){
+ *         int total=0;
+ *         int topOne= Integer.parseInt((String) one.pop());
+ *         int topTwo= Integer.parseInt((String) two.pop());
+ *         //checks if the previous calculation had a carried one.
+ *         if(carry) {
+ *         //adds the carry value and the two popped values.
+ *         total = +1 + topOne + topTwo;
+ *         }else{
+ *         //no carry value just adds two values.
+ *         total=topOne+topTwo;
+ *         }
+ *         //checks if the total is greater than 10
+ *         if(total>10){
+ *         //sets carry value to true and subtracts 10 from the total value
+ *         carry=true;
+ *         total=total-10;
+ *         }else{
+ *         //sets carry to false
+ *         carry=false;
+ *         //adds the values to a "Solved" stack in reverse order.
+ *         } solved.push(total);
+ *         }
+ *         //while solved is not empty it goes through popping each numeric char and then adds them to end string.
+ *         while (!solved.isEmpty()){
+ *         char newChar= (char) solved.pop();
+ *         endString=endString+newChar;
+ *         }
+ *         //returns endstring.
+ *         return endString;
+ *         }
+ */
 
