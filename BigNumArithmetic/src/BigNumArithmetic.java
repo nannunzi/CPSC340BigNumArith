@@ -312,6 +312,22 @@ public class BigNumArithmetic {
             return total;
     }
 }
+public String exponent(String val1, String val2){
+	LinkedList<Integer> numbah = new LinkedList<Integer>;
+	int orig = Integer.parseInt(val1);
+	int expo = Integer.parseInt(val2);
+	String stexpo = ""
+	if (expo == 0){return 1;}
+	//else if (expo == 1){return (String)val1};
+	else if (expo%2 ==0){
+		stexpo=Integer.toString(expo/2);
+		return exponent(multiply(val1, val1),stexpo)};
+	else if (expo%2 ==1){
+		stexpo=Integer.toStrong(expo-1);
+		return(multiply(val1,val1),stexpo);
+}
+
+//scrap code
 /**
  * public static String addition(String firstVar, String secondVar){
  *         //three stacks, two for containing the character of each source numeric string, one for the solution
