@@ -312,19 +312,26 @@ public class BigNumArithmetic {
             return total;
     }
 }
+/*compared to the others, this exponentiation code is very simple. It is based on the wikipedia page for
+eponents by squaring, and utilizes a simple recursive loop to raise a number to the power provided in val2
+it utilizes the pre-existing functions in multiplication to create a very short process
+@param val1
+@param val2
+@return
+*/
 public String exponent(String val1, String val2){
-	LinkedList<Integer> numbah = new LinkedList<Integer>;
+	LinkedList<Integer> numbah = new LinkedList<Integer>();
 	int orig = Integer.parseInt(val1);
 	int expo = Integer.parseInt(val2);
 	String stexpo = ""
-	if (expo == 0){return 1;}
+	if (expo == 0){return Integer.toString(1);}
 	//else if (expo == 1){return (String)val1};
 	else if (expo%2 ==0){
 		stexpo=Integer.toString(expo/2);
-		return exponent(multiply(val1, val1),stexpo)};
+		return (exponent(multiply(val1, val1),stexpo))};
 	else if (expo%2 ==1){
-		stexpo=Integer.toStrong(expo-1);
-		return(multiply(val1,val1),stexpo);
+		stexpo=Integer.toString((expo-1)/2);
+		return (exponent(multiply(val1,val1),stexpo))};
 }
 
 //scrap code
