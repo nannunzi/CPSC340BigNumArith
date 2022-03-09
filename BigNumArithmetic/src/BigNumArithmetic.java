@@ -22,23 +22,33 @@ public class BigNumArithmetic {
 	    for(String i :arrayRaw){
 	    	if (i.equalsIgnoreCase("+")||i.equalsIgnoreCase("*")||i.equalsIgnoreCase("^")){
 			if(i.equalsIgnoreCase("+"){
-				String val1= arrayRaw.get(i);
-				String val2= arrayRaw.get(i-1);
+				//String val1= arrayRaw.get(i);
+				//String val2= arrayRaw.get(i-1);
+                String val1= string1.pop();
+                String val2= string1.pop();
 				retval = addition(val1,val2);
 				}
 			else if(i.equalsIgnoreCase("*"){
-                                String val1= arrayRaw.get(i);
-                                String val2= arrayRaw.get(i-1);
+                                //String val1= arrayRaw.get(i);
+                                //String val2= arrayRaw.get(i-1);
+                                String val1=string1.pop();
+                                string val2=string1.pop();
                                 retval = multiply(val1,val2);
+                                string1.push(retval);
+
+
                                 }
 			else if(i.equalsIgnoreCase("^"){
-                                String val1= arrayRaw.get(i);
-                                String val2= arrayRaw.get(i-1);
+                                //String val1= arrayRaw.get(i);
+                                //String val2= arrayRaw.get(i-1);
+                                    String val1=string1.pop();
+                                    String val2=string1.pop();
                                 retval = exponent(val1,val2);
                                 }
 			}
 		else{
-			inputs.add(i);
+			//inputs.add(i);
+            string1.push(i);
 			count++;
 			}
 		    System.out.println(retval);
@@ -70,6 +80,20 @@ public class BigNumArithmetic {
             }*/
         }
     }
+
+    /** Addition Method
+     * This method takes two input strings, It then formats the two strings to the same length implementing leading 0s until the smaller string matches the larger.
+     * Once the two strings are the same length, it begins pushing all of firstVars digits one by one onto the Linked Stack labled one. it then pushes all of the secondVars digits onto stack 2 with each digit taking a node.
+     * Once finished it goes through the shared length of the two strings, popping each digit starting at the ones place. with the digit in each place popped it adds the two together, and if the carry value is marked as true, it adds an additional value of 1 to the total.
+     * If a resulting value is greater than 10 it marks the Boolean Value of Carry as True, and subtracts 10 from the total. If the value is less than ten it sets the Boolean Value of Carry to false.
+     * Once Carry has been checked and prepped for the next place slot, it pushes the value onto a third Linked Stack labled "Solved".
+     * It then repeats this proccess for each node in the two Stacks.
+     * When this is done the Solved Linked stack should have it's values for individual placement in reverse order starting at the highest place value and descending to the last which represents the ones place.
+     * It then adds these to a string labeled endString, appending the values as individual characters. When the Stack is empty it returns the endString value.
+     * @param firstVar The first Variable being added in string form.
+     * @param secondVar The second variable being added in string form
+     * @return The fully added value in string form.
+     */
     public String addition(String firstVar, String secondVar){
         //three stacks, two for containing the character of each source numeric string, one for the solution
         LStack one= new LStack();
@@ -88,6 +112,7 @@ public class BigNumArithmetic {
             topLength=secondVar.length();
         }
         //formats two new strings to the top length, formatting the smaller one with leading 0s (technically reformats both but the larger doesn't undergo any changes)
+        //This is so when adding the two together any empty spots in the smaller number has a numeric value of 0.
         String formattedFirst= String.format("%0"+topLength+"d", firstVar);
         String formattedSecond= String.format("%0"+topLength+"d", secondVar);
 
@@ -199,6 +224,20 @@ public class BigNumArithmetic {
         //returns endstring.
         return endString;
         }*/
+
+
+    /** Multiply
+     * Formats the string variables fed into the method and an independent "Total" String to having the same total length.
+     *  Breaks the two formatted String variables into Stacks with each digit being stored in a seperate node.
+     *  Takes the first Operand and pops the first digit off of it.
+     *  The method then goes through every single digit in the second operand, multiplying the two digits together and adding it to a running total via the addition method.
+     *  It does this by popping the digits from the 2nd operand stored in Stack two. After the basic calculation of the two one digit variables is done it pushes the value to the Stack temp.
+     *  Once all the values have been popped from two, the next value is popped from One and the process repeats by popping each one digit value off of Temp/Two alternating between the two with each digit popped from Stack One.
+     *
+     * @param firstVar
+     * @param secondVar
+     * @return
+     */
     public String multiply(String firstVar, String secondVar){
         //three stacks, two for containing the character of each source numeric string, one for the solution
         String total="000000000000000000";
@@ -222,6 +261,7 @@ public class BigNumArithmetic {
         //formats two new strings to the top length, formatting the smaller one with leading 0s (technically reformats both but the larger doesn't undergo any changes)
         String formattedFirst= String.format("%0"+topLength+"d", firstVar);
         String formattedSecond= String.format("%0"+topLength+"d", secondVar);
+        String formattedTotal=String.format("%0"+topLength+"d", total);
 
         //Goes through the formatted string pushing each character individually to the first stack.
         for (int i=0; i<formattedFirst.length(); i++){
@@ -231,34 +271,44 @@ public class BigNumArithmetic {
         for (int i=0; i<formattedSecond.length(); i++){
             two.push(formattedSecond.charAt(i));
         }
-        //for the total length (how many digits) it goes through, pops the top off of each stack (which would be the ones place)
+        //for the total length (how many digits) it goes through, pops the top off of the first stack
         for(int i=0; i<topLength; i++){
             int topOne= (int) one.pop();
-
+            //checks if Stack two is empty or the Temp Stack is empty
             if(two.isEmpty()) {
+
+                //Repeats the below for every single value in the Stack 2.
                 for (int c = 0; c < topLength; c++) {
-
+                    //Pops off the top value of the temp Stack
                     int value = (int) temp.pop();
+                    //Multiplies the single digit value by the topOne value
                     int tempTotalInt = value * topOne;
+                    //adds the string to a temp value to check the result of that step of the long multiplication
                     String tempTotal = Integer.toString(tempTotalInt);
-
+                    //adds the tempTotal to the actual Total via the above Addition Method.
                     total = addition(total, tempTotal);
+                    //pushes the value into the two stack ensuring that every value alternates between the two for each iteration.
                     two.push(value);
                 }
             }else{
+                //if temp is empty go through each value in Stack 2
                 for(int c=0; c<topLength; c++) {
-
+                    //Pop the top value of stack two. casting it to an Integer
                     int value = (int) two.pop();
+                    //Multiply the popped digit by topOne
                     int tempTotalInt = value * topOne;
+                    //Parses the integer to a string saving it to tempTotal
                     String tempTotal = Integer.toString(tempTotalInt);
+                    //Adds the total to the overall multiplication total
                     total = addition(total, tempTotal);
+                    //Pushes the value to Temp.
                     temp.push(value);
                 }
             }
         }
 
 
-        //returns endstring.
+        //returns the final Total.
             return total;
     }
 }
