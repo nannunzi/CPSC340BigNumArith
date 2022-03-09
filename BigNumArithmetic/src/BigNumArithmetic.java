@@ -1,12 +1,10 @@
-mport java.util.*;
+import java.util.*;
 import java.io.*;
 
 public class BigNumArithmetic {
 
     public static void main(String[] args) throws IOException {
         File source = new File(args[0]);
-	Scanner s = new Scanner(source);
-	
         LStack string1 = new LStack();
         ArrayList<String> stringArray = new ArrayList()<String>;
         int topLength=0;
@@ -15,13 +13,35 @@ public class BigNumArithmetic {
             //if It exists, opens up a scanner
 	    Scanner s = new Scanner(source);
 	    while (s.hasnextline()){
-	    String raw = s.nextline()
-	    raw.split(" ");
-	    String input1="";
-	    String input2="";
-	    String[] operators;//computer about to die will finish in morning during class
-	    for(int i = 0; i<raw.size; i++){
-	    
+	    String raw = s.nextline();
+	    String retval = raw;
+	    String[] arrayRaw=raw.split(" ");
+	    int count = 0;
+	    ArrayList<String> inputs = new ArrayList<String>;
+	    ArrayList<String> operators;= new ArrayList<String>;
+	    for(String i :arrayRaw){
+	    	if (i.equalsIgnoreCase("+")||i.equalsIgnoreCase("*")||i.equalsIgnoreCase("^")){
+			if(i.equalsIgnoreCase("+"){
+				String val1= arrayRaw.get(i);
+				String val2= arrayRaw.get(i-1);
+				retval = addition(val1,val2);
+				}
+			else if(i.equalsIgnoreCase("*"){
+                                String val1= arrayRaw.get(i);
+                                String val2= arrayRaw.get(i-1);
+                                retval = multiply(val1,val2);
+                                }
+			else if(i.equalsIgnoreCase("^"){
+                                String val1= arrayRaw.get(i);
+                                String val2= arrayRaw.get(i-1);
+                                retval = exponent(val1,val2);
+                                }
+			}
+		else{
+			inputs.add(i);
+			count++;
+			}
+		    System.out.println(retval);
 		}
 	}	    /*if It exists, opens up a file reader
             FileReader reader = new FileReader(source);
@@ -111,7 +131,7 @@ public class BigNumArithmetic {
         //returns endstring.
         return endString;
         }
-
+/* well this was dumb
  public String subtract(String firstVar, String secondVar){ //should be finished
         //three stacks, two for containing the character of each source numeric string, one for the solution
         LStack one= new LStack();
@@ -178,7 +198,7 @@ public class BigNumArithmetic {
 	 }
         //returns endstring.
         return endString;
-        }
+        }*/
     public String multiply(String firstVar, String secondVar){
         //three stacks, two for containing the character of each source numeric string, one for the solution
         String total="000000000000000000";
