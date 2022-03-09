@@ -5,12 +5,25 @@ public class BigNumArithmetic {
 
     public static void main(String[] args) throws IOException {
         File source = new File(args[0]);
+	Scanner s = new Scanner(source);
+	
         LStack string1 = new LStack();
-        ArrayList<String> stringArray = new ArrayList();
+        ArrayList<String> stringArray = new ArrayList()<String>;
         int topLength=0;
 
         if (source.exists()) {
-            //if It exists, opens up a file reader
+            //if It exists, opens up a scanner
+	    Scanner s = new Scanner(source);
+	    while (s.hasnextline()){
+	    String raw = s.nextline()
+	    raw.split(" ");
+	    String input1="";
+	    String input2="";
+	    String[] operators;//computer about to die will finish in morning during class
+	    for(int i = 0; i<raw.size; i++){
+	    
+		}
+	}	    /*if It exists, opens up a file reader
             FileReader reader = new FileReader(source);
             StringBuilder sb = new StringBuilder();
             char ch;
@@ -34,7 +47,7 @@ public class BigNumArithmetic {
                         }
 
                 }
-            }
+            }*/
         }
     }
     public String addition(String firstVar, String secondVar){
